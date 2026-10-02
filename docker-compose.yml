@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: info_map_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      # host.docker.internal — адрес хоста, где запущен бэкенд.
+      # На Windows и macOS работает из коробки.
+      # На Linux нужен extra_hosts ниже.
+      BACKEND_URL: http://host.docker.internal:8000
+      API_KEY: "1"
+    extra_hosts:
+      # Раскомментируйте строку ниже, если запускаете на Linux:
+      # - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway"
